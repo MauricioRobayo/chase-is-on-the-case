@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import logo from "./assets/logo.png";
-import chase from "./assets/chase2.png";
-import everest from "./assets/everest2.png";
-import marshall from "./assets/marshall2.png";
-import rocky from "./assets/rocky2.png";
-import rubble from "./assets/rubble2.png";
-import ryder from "./assets/ryder2.png";
-import skye from "./assets/skye2.png";
-import tracker from "./assets/tracker2.png";
-import zuma from "./assets/zuma2.png";
 import styled from "styled-components";
+import assets from "./assets";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -55,22 +46,72 @@ type Friend = {
     | "tracker"
     | "zuma";
   state: "hidden" | "found";
-  img: string;
+  img: {
+    png: string;
+    png120: string;
+    webp: string;
+    webp120: string;
+  };
   color: string;
 };
 
 const targetFriendName = "chase";
 
 const friends: Friend[] = [
-  { name: "chase", state: "hidden", img: chase, color: "#27A8FF" },
-  { name: "everest", state: "hidden", img: everest, color: "#B4A5E8" },
-  { name: "marshall", state: "hidden", img: marshall, color: "#E62928" },
-  { name: "rocky", state: "hidden", img: rocky, color: "#70B360" },
-  { name: "rubble", state: "hidden", img: rubble, color: "#DFBA01" },
-  { name: "ryder", state: "hidden", img: ryder, color: "#F2AC10" },
-  { name: "skye", state: "hidden", img: skye, color: "#FF8FC0" },
-  { name: "tracker", state: "hidden", img: tracker, color: "#B5CB9E" },
-  { name: "zuma", state: "hidden", img: zuma, color: "#F16939" },
+  {
+    name: "chase",
+    state: "hidden",
+    img: assets.chase,
+    color: "#27A8FF",
+  },
+  {
+    name: "everest",
+    state: "hidden",
+    img: assets.everest,
+    color: "#B4A5E8",
+  },
+  {
+    name: "marshall",
+    state: "hidden",
+    img: assets.marshall,
+    color: "#E62928",
+  },
+  {
+    name: "rocky",
+    state: "hidden",
+    img: assets.rocky,
+    color: "#70B360",
+  },
+  {
+    name: "rubble",
+    state: "hidden",
+    img: assets.rubble,
+    color: "#DFBA01",
+  },
+  {
+    name: "ryder",
+    state: "hidden",
+    img: assets.ryder,
+    color: "#F2AC10",
+  },
+  {
+    name: "skye",
+    state: "hidden",
+    img: assets.skye,
+    color: "#FF8FC0",
+  },
+  {
+    name: "tracker",
+    state: "hidden",
+    img: assets.tracker,
+    color: "#B5CB9E",
+  },
+  {
+    name: "zuma",
+    state: "hidden",
+    img: assets.zuma,
+    color: "#F16939",
+  },
 ];
 
 const shuffle = <T extends {}>(array: T[]): T[] => {
@@ -124,12 +165,12 @@ function App() {
               {friend.state === "hidden" ? (
                 <TileImg
                   alt="logo"
-                  src={logo}
+                  src={assets.logo.webp}
                   onClick={() => onClickHandler(friend.name)}
                 />
               ) : (
                 <TileImg
-                  src={friend.img}
+                  src={friend.img.webp}
                   alt={friend.name}
                   onClick={() => setCurrentFriend(friend)}
                 />
