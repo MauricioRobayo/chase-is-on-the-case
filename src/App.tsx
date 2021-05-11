@@ -12,12 +12,17 @@ const Wrapper = styled.div`
   max-width: 520px;
 `;
 
-const Tile = styled.div`
+type TileProps = {
+  currentFriend?: Friend;
+};
+const Tile = styled.div<TileProps>`
   background-color: #2089cf;
   place-items: center;
   border-radius: 0.5rem;
   padding: 0.25rem;
   display: grid;
+  border: 4px solid
+    ${({ currentFriend }) => (currentFriend ? currentFriend.color : "#2089cf")};
 `;
 
 const TilePicture = styled(Picture)`
@@ -166,7 +171,12 @@ function App() {
       <Wrapper>
         {board.map((friend) => {
           return (
-            <Tile key={friend.name}>
+            <Tile
+              key={friend.name}
+              currentFriend={
+                currentFriend?.name === friend.name ? currentFriend : undefined
+              }
+            >
               {friend.state === "hidden" ? (
                 <TilePicture
                   alt="logo"
