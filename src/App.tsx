@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import assets from "./assets";
 import Picture from "./components/Picture";
-import { TiRefreshOutline } from "react-icons/ti";
 
 const Wrapper = styled.div`
   padding: 1rem;
