@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import assets from "./assets";
 import Picture from "./components/Picture";
