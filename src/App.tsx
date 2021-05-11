@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import assets from "./assets";
 import Picture from "./components/Picture";
+import { TiRefreshOutline } from "react-icons/ti";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -40,6 +41,21 @@ const FriendName = styled.h1`
   text-transform: uppercase;
   text-align: center;
   font-size: 3rem;
+`;
+
+const Header = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 3rem;
+  color: #27a8ff;
+  font-weight: bold;
+`;
+
+const Footer = styled.footer`
   height: 2rem;
 `;
 
@@ -137,6 +153,12 @@ function App() {
   const [currentFriend, setCurrentFriend] = useState<Friend | null>(null);
   const [targetFound, setTargetFound] = useState(false);
 
+  const newGame = () => {
+    setTargetFound(false);
+    setCurrentFriend(null);
+    setBoard(shuffle(friends));
+  };
+
   const onClickHandler = (name: Friend["name"]) => {
     const activeFriend = friends.find((friend) => friend.name === name);
 
@@ -168,6 +190,13 @@ function App() {
   };
   return (
     <>
+      <Header>
+        {targetFound ? (
+          <Button type="button" onClick={newGame}>
+            ⟳
+          </Button>
+        ) : null}
+      </Header>
       <Wrapper>
         {board.map((friend) => {
           return (
@@ -198,9 +227,13 @@ function App() {
           );
         })}
       </Wrapper>
-      <FriendName color={currentFriend ? currentFriend.color : ""}>
-        {currentFriend ? currentFriend.name : ""}
-      </FriendName>
+      <Footer>
+        {currentFriend ? (
+          <FriendName color={currentFriend.color}>
+            {currentFriend.name}
+          </FriendName>
+        ) : null}
+      </Footer>
     </>
   );
 }
