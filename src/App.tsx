@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import assets from "./assets";
+import Picture from "./components/Picture";
 
 const Wrapper = styled.div`
   padding: 1rem;
@@ -8,7 +9,7 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1rem;
-  max-width: 720px;
+  max-width: 520px;
 `;
 
 const Tile = styled.div`
@@ -19,11 +20,13 @@ const Tile = styled.div`
   display: grid;
 `;
 
-const TileImg = styled.img`
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
+const TilePicture = styled(Picture)`
+  img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
 `;
 
 const FriendName = styled.h1`
@@ -48,7 +51,6 @@ type Friend = {
   state: "hidden" | "found";
   img: {
     png: string;
-    png120: string;
     webp: string;
     webp120: string;
   };
@@ -163,16 +165,20 @@ function App() {
           return (
             <Tile key={friend.name}>
               {friend.state === "hidden" ? (
-                <TileImg
+                <TilePicture
                   alt="logo"
-                  src={assets.logo.webp}
-                  onClick={() => onClickHandler(friend.name)}
+                  webp={assets.logo.webp}
+                  webpSmall={assets.logo.webp120}
+                  png={assets.logo.png}
+                  onClickHandler={() => onClickHandler(friend.name)}
                 />
               ) : (
-                <TileImg
-                  src={friend.img.webp}
+                <TilePicture
+                  webp={friend.img.webp}
+                  webpSmall={friend.img.webp120}
+                  png={friend.img.png}
                   alt={friend.name}
-                  onClick={() => setCurrentFriend(friend)}
+                  onClickHandler={() => setCurrentFriend(friend)}
                 />
               )}
             </Tile>
