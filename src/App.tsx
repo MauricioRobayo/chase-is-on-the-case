@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import assets from "./assets";
 import Picture from "./components/Picture";
@@ -35,6 +35,7 @@ const FriendName = styled.h1`
   text-transform: uppercase;
   text-align: center;
   font-size: 3rem;
+  height: 2rem;
 `;
 
 type Friend = {
@@ -124,8 +125,10 @@ const shuffle = <T extends {}>(array: T[]): T[] => {
   return array;
 };
 
+const initialBoard = shuffle(friends);
+
 function App() {
-  const [board, setBoard] = useState(shuffle(friends));
+  const [board, setBoard] = useState(initialBoard);
   const [currentFriend, setCurrentFriend] = useState<Friend | null>(null);
   const [targetFound, setTargetFound] = useState(false);
 
@@ -185,11 +188,9 @@ function App() {
           );
         })}
       </Wrapper>
-      {currentFriend ? (
-        <FriendName color={currentFriend.color}>
-          {currentFriend.name}
-        </FriendName>
-      ) : null}
+      <FriendName color={currentFriend ? currentFriend.color : ""}>
+        {currentFriend ? currentFriend.name : ""}
+      </FriendName>
     </>
   );
 }
